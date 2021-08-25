@@ -1,0 +1,60 @@
+<center>
+<h1> User Wish-List </h1>
+
+<b> Create your wishlist record here </b>
+
+<form action= "/save" method= "POST">
+
+    <label for="username">Username</label>
+    <input name="username" id="username" required><br><br>
+
+    <label for="place">Favorite Place</label>
+    <input name="place" id="place" required><br><br> 
+
+    <label for="food">Favorite Food</label>
+    <input name="food" id="food" required><br><br>
+
+    <input type="submit" value="Save">
+
+</form>
+
+<b>Type in the username and fetch the Wishlist</b>
+<form action= "/get" method= "POST" > 
+    <label for="username">Username</label>
+    <input name="username" id="username" required><br><br>
+    <input type="submit" value="Submit">
+</form>
+<!-- showing the results if user_data is not found -->
+{% if get  %}
+<font color='blue'> The Wishlist for <b>{{username}}</b> is <b>{{place}}</b> and <b>>{{food}}</b></font>
+<small>{{msg}}</small>
+{% endif %}
+
+{% if no_record %}
+<font color='red'>{{msg}}</font>
+{% endif %}
+
+<!-- since we are using flask, we are able to get information from the backend to the frontend -->
+<!-- checking if the data exists -->
+{% if user_exists %}
+<font color='red'>User <b>{{username}}</b> already exists with the wishlist <b>{{place}}</b> and <b>>{{food}}</b></font>
+<small>{{msg}}</small>
+{% endif %} 
+
+<!-- make a condition to show saved message -->
+{% if saved %}
+<font color='green'> Successfully saved data for <b>{{username}}</b> with Wishlist <b> {{place}} </b> and <b>{{food}}</b>!!!</font>
+{% endif %}
+</center>
+<br>
+<!-- create a link to getting all the keys, if we have it, it will be displayed -->
+<a href="/keys">Keys</a>
+{% if keys %}
+    <h3> Keys </h3>
+    <small>(From DataBase)</small>
+    <ul>
+    {% for username in usernames %}
+        <li>{{username}}</li>  
+    {% endfor %}
+    </ul>
+{% endif %}
