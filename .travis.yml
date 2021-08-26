@@ -1,12 +1,12 @@
 language: generic
-
+install: skip
 servisces: 
   - docker
 
 afer_success:
   - docker build -t daizaria/user-wishlist-app .
 
-  - echo '$DOCKER_PASSWORD' | docker login -u '$DOCKER_ID' --password-stdin
+  - echo \'$DOCKER_PASSWORD\' | docker login -u \'$DOCKER_ID\' --password-stdin
 
   - docker push daizaria/user-wishlist-app
 
@@ -19,5 +19,5 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   bucket_name: 'multi-container-wishlist-daiz'
   bucket_path: 'docker'
-  on:
+  True:
     branch: main  
