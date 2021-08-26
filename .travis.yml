@@ -2,7 +2,7 @@ language: generic
 install: skip
 servisces: 
   - docker
-
+#updated
 afer_success:
   - docker build -t daizaria/user-wishlist-app .
 
